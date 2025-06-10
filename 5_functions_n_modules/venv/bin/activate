@@ -39,10 +39,10 @@ deactivate nondestructive
 if [ "${OSTYPE:-}" = "cygwin" ] || [ "${OSTYPE:-}" = "msys" ] ; then
     # transform D:\path\to\venv to /d/path/to/venv on MSYS
     # and to /cygdrive/d/path/to/venv on Cygwin
-    export VIRTUAL_ENV=$(cygpath /root/Python/learning/5_functions_n_modules/venv)
+    export VIRTUAL_ENV=$(cygpath /root/Docs/Python/python_learning/5_functions_n_modules/venv)
 else
     # use the path as-is
-    export VIRTUAL_ENV=/root/Python/learning/5_functions_n_modules/venv
+    export VIRTUAL_ENV=/root/Docs/Python/python_learning/5_functions_n_modules/venv
 fi
 
 _OLD_VIRTUAL_PATH="$PATH"

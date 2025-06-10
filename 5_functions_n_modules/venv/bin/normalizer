@@ -1,4 +1,4 @@
-#!/root/Python/learning/5_functions_n_modules/venv/bin/python3
+#!/root/Docs/Python/python_learning/5_functions_n_modules/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
