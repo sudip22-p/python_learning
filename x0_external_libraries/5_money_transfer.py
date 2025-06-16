@@ -21,15 +21,18 @@ lock = threading.Lock()
 def transfer_money(sender, receiver, amount):
     with lock:
         print(f"{sender} wants to send ₹{amount} to {receiver}")
+        print("checking the balance availability........")
 
         # Check balance before transferring
         if accounts[sender] >= amount:
+            print("Balance available transferring money..........")
             time.sleep(1)  # Simulate transaction delay
             accounts[sender] -= amount
             accounts[receiver] += amount
             print(f"✅ {sender} sent ₹{amount} to {receiver}")
         else:
             print(f"❌ {sender} has insufficient balance.")
+            print("Transaction failed !!")
 
         # Show updated balances
         print(
