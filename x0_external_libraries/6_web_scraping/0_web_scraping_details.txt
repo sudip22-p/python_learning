@@ -1,0 +1,57 @@
+📘 Web Scraping in Python
+
+🔹 What is Web Scraping?
+Web scraping is an automated method used to extract large amounts of data from websites quickly.
+It is commonly used to gather data for analysis, research, price comparison, job listings, etc.
+
+🔹 Why Use Web Scraping?
+- Collect real-time or bulk data from websites that don’t provide APIs.
+- Automate data collection (e.g., from e-commerce sites, blogs, news portals).
+- Monitor changes or trends over time.
+
+🔹 Python Libraries Used:
+1. requests – to fetch web page content (HTML)
+2. BeautifulSoup – to parse and extract structured data from HTML
+3. Selenium – to interact with JavaScript-rendered pages, simulate real browser actions
+
+🔹 Static vs Dynamic Websites:
+- Static Website: Content is available directly in the HTML (e.g., http://books.toscrape.com/)
+- Dynamic Website: Content is loaded by JavaScript after the initial page load (e.g., https://www.daraz.com.np/)
+
+🔹 Process of Web Scraping with BeautifulSoup (Static Sites):
+1. Send HTTP request using `requests.get()`
+2. Parse HTML using `BeautifulSoup`
+3. Locate elements using tags/classes/ids
+4. Extract the data (e.g., text, links, images)
+5. Optionally store data (CSV, database, etc.)
+
+🔹 Process of Web Scraping with Selenium (Dynamic Sites):
+1. Launch headless browser (Chrome, Firefox)
+2. Load dynamic page with `driver.get()`
+3. Wait for elements to be rendered using `WebDriverWait`
+4. Extract data using `find_element` or `find_elements`
+5. Close browser after scraping
+
+🔹 Using Selenium + BeautifulSoup Together:
+- Use Selenium to render and load JavaScript content
+- Use BeautifulSoup to parse the final HTML page (from `driver.page_source`)
+- Best of both worlds: handle dynamic content and parse with powerful soup selectors
+
+🔹 Example - Scraping Book Titles & Prices from books.toscrape.com:
+- Step 1: Fetch page with requests
+- Step 2: Parse with BeautifulSoup
+- Step 3: Extract book title and price using HTML structure
+
+🔹 Example - Scraping Daraz Products with Selenium:
+- Use Selenium to load content (JS-heavy)
+- Find elements using their CSS classes (title, price)
+
+🔹 Ethical & Legal Considerations:
+- Always check a site’s robots.txt before scraping
+- Do not overload the site with requests (use delays, headers)
+- Use scraping only for ethical, legal, and permitted purposes
+
+Summary:
+- Use BeautifulSoup for fast, static-site scraping
+- Use Selenium for dynamic, JS-heavy websites
+- Use both together for full flexibility and reliability
