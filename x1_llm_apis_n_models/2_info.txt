@@ -1,0 +1,97 @@
+# python3 2_huggingface_transformers.py
+👋 Hi! I’m your factual AI assistant using FLAN-T5-XL. Type 'exit' to quit.
+You: what is the value of x if x-y=7
+🤖 AI is thinking...
+
+config.json: 100%|█████████████████████████████████████████████████████████████████████████████████████████████████████| 1.44k/1.44k [00:00<00:00, 13.0MB/s]
+model.safetensors.index.json: 100%|████████████████████████████████████████████████████████████████████████████████████| 53.0k/53.0k [00:00<00:00, 1.01MB/s]
+model-00002-of-00002.safetensors: 100%|████████████████████████████████████████████████████████████████████████████████| 1.95G/1.95G [03:22<00:00, 9.65MB/s]
+model-00001-of-00002.safetensors: 100%|████████████████████████████████████████████████████████████████████████████████| 9.45G/9.45G [11:23<00:00, 13.8MB/s]
+Fetching 2 files: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [11:25<00:00, 342.55s/it]
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  5.18it/s]
+generation_config.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 147/147 [00:00<00:00, 1.84MB/s]
+tokenizer_config.json: 100%|███████████████████████████████████████████████████████████████████████████████████████████| 2.54k/2.54k [00:00<00:00, 31.0MB/s]
+spiece.model: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████| 792k/792k [00:00<00:00, 3.32MB/s]
+tokenizer.json: 100%|███████████████████████████████████████████████████████████████████████████████████████████████| 2.42M/2.42M [-1:59:40<00:00, -119kB/s]
+special_tokens_map.json: 100%|█████████████████████████████████████████████████████████████████████████████████████████| 2.20k/2.20k [00:00<00:00, 26.2MB/s]
+🤖 AI: -1
+You: Allright explain about the llm and its models and their usage.
+🤖 AI is thinking...
+
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  5.27it/s]
+🤖 AI: Allright explain about the LLM and its models and their usage.
+You: explain the llm and its models and their usage
+🤖 AI is thinking...
+
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  9.79it/s]
+🤖 AI: LLM is a mathematical model that describes the relationship between a set of variables and a set of functions.
+You: what does the physics wallah do?
+🤖 AI is thinking...
+
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00,  9.87it/s]
+🤖 AI: The Physics Wallah is a fictional character in the science fiction television series "The X-Files"
+You: haha what does a person called who never walks in night time;
+🤖 AI is thinking...
+
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:21<00:00, 10.75s/it]
+🤖 AI: nocturnal person
+You: why dog is called domestic animal?
+🤖 AI is thinking...
+
+Loading checkpoint shards: 100%|██████████████████████████████████████████████████████████████████████████████████████████████| 2/2 [00:00<00:00, 10.49it/s]
+🤖 AI: The dog is a member of the family Canidae
+You: exit
+👋 Goodbye!
+
+
+
+---------------------------------------------------------------------------------
+Problem:
+---------------------------------------------------------------------------------
+The model is not working properly giving the wrong answers because it is not trained for conversational tasks.
+For more advanced kinnda ai asistant, we can go for retrieval-augmented generation (RAG) and use a combination of a language model and a knowledge base.
+
+Retrieval-Augmented Generation (RAG) is a technique that combines the strengths of large language models (LLMs) with external knowledge bases to provide more accurate and contextually relevant responses.
+
+How does RAG work? Step-by-step:
+User Query Input:
+User asks a question or gives a prompt.
+
+Retrieve Relevant Documents:
+A retriever module searches an external knowledge base (e.g., Wikipedia, company docs, databases) for documents or passages related to the query.
+
+Can use vector search (e.g., FAISS) or keyword search.
+
+Combine Query + Retrieved Context:
+The top relevant documents or text snippets are combined with the original query.
+
+Generate Answer:
+The LLM takes this enriched input (query + retrieved context) and produces a final answer.
+
+This leads to factual, up-to-date, and relevant responses.
+
+Why use RAG?
+LLMs can hallucinate or give outdated info.
+
+External knowledge keeps answers grounded in facts.
+
+Scalable to large corpora without retraining the model.
+
+Useful for domain-specific knowledge, FAQs, customer support, research.
+
+Simple analogy:
+Instead of asking a person to answer everything from memory, you let them quickly look up the facts in a book before answering.
+
+Basic RAG architecture example:
+rust
+Copy
+Edit
+User Query --> Retriever --> Top Docs --> LLM (Generator) --> Final Answer
+Implementation tools & libs:
+Retrieval: FAISS, ElasticSearch, Pinecone
+
+Embeddings: OpenAI embeddings, Sentence Transformers
+
+Generation: Hugging Face Transformers (e.g., T5, GPT)
+
+RAG framework: Hugging Face transformers has built-in RAG classes (RagRetriever, RagSequenceForGeneration)
