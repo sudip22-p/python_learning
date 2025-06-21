@@ -1,0 +1,104 @@
+Introduction to Data Handling and Visualization in Python
+----------------------------------------------------------
+
+1. Data Handling:
+------------------
+Data handling means managing and working with data to make it ready for analysis or visualization.
+It includes loading, cleaning, modifying, and organizing data.
+
+Main tasks in data handling:
+- Loading data from files (CSV, Excel, JSON, etc.)
+- Checking structure and types of data
+- Handling missing values
+- Filtering specific rows or columns
+- Sorting or grouping data
+- Creating new columns from existing data
+- Exporting cleaned data
+
+2. pandas:
+-----------
+pandas is a Python library mainly used for data handling and analysis.
+
+Key concepts in pandas:
+- DataFrame: A 2D table structure with rows and columns.
+- Series: A single column or a 1D array-like object.
+
+Common functions and features in pandas:
+- read_csv(): Load CSV file into DataFrame
+- head(): View first few rows
+- info(): See structure and data types
+- describe(): Summary statistics (mean, count, std, etc.)
+- dropna(): Remove rows with missing values
+- fillna(): Replace missing values
+- groupby(): Group data for aggregation
+- sort_values(): Sort data by column
+- loc[], iloc[]: Access specific rows and columns
+- apply(): Apply custom functions to columns
+
+
+3. Data Visualization:
+-----------------------
+Data visualization is the process of creating graphical representations of data to better understand patterns, trends, or comparisons.
+
+Types of visualizations:
+- Line plot: Shows trends over time
+- Bar chart: Compares quantities of different categories
+- Histogram: Shows distribution of a single variable
+- Scatter plot: Shows relationship between two variables
+- Pie chart: Shows parts of a whole
+
+4. matplotlib:
+---------------
+matplotlib is a basic but powerful Python library for creating static plots and charts.
+
+Common matplotlib functions:
+- plot(): Create a simple line plot
+- bar(): Create a bar chart
+- hist(): Create a histogram
+- scatter(): Create a scatter plot
+- title(), xlabel(), ylabel(): Add labels and title
+- show(): Display the plot
+
+matplotlib is often used with pandas. For example, pandas has a plot() function that uses matplotlib internally.
+
+5. Jupyter Notebook:
+---------------------
+Jupyter Notebook is an interactive development environment for writing and running Python code in the browser.
+
+Features:
+- Write code in cells and run them one by one
+- Display outputs (like tables and plots) directly below the code
+- Add formatted text, headings, and notes using Markdown
+- View all code and results in a single document
+
+To install and run Jupyter Notebook:
+- Install: pip install notebook
+- Run: jupyter notebook (in terminal or command line)
+
+It opens in a web browser and allows creating .ipynb files.
+
+6. .ipynb file:
+----------------
+.ipynb stands for "IPython Notebook" file. It is the file format used by Jupyter Notebook.
+
+Contents of an .ipynb file:
+- Code cells (Python code)
+- Output cells (printed output, plots)
+- Markdown cells (text, titles, notes)
+
+You can share, download, or export .ipynb files to other formats like HTML, PDF, or .py script.
+
+7. Additional Related Terms:
+-----------------------------
+- CSV (Comma-Separated Values): Common format for tabular data, readable by pandas.
+- Data cleaning: Fixing or removing incorrect, incomplete, or duplicated data.
+- Aggregation: Summarizing data (mean, count, sum, etc.)
+- Indexing: Accessing parts of a DataFrame using labels or positions.
+- Visualization libraries (other than matplotlib): seaborn, plotly (optional for advanced use)
+
+Conclusion:
+------------
+Data handling and visualization are key parts of data analysis in Python.
+pandas helps in working with data efficiently.
+matplotlib helps in making simple and effective charts.
+Jupyter Notebook provides a user-friendly environment to perform all tasks interactively.
