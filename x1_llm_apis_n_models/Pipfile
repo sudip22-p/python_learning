@@ -6,8 +6,11 @@ name = "pypi"
 [packages]
 openai = "*"
 python-dotenv = "*"
-transformers = "*"
 torch = "*"
+transformers = "*"
+sentence-transformers = "*"
+faiss-cpu = "*"
+sentencepiece = "*"
 
 [dev-packages]
 
