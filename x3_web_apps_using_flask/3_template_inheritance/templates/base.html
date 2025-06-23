@@ -1,0 +1,23 @@
+<!-- base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}My Site{% endblock %}</title> <!-- Dynamic title block -->
+  {# {% endblock %} Closes the block started with {% block block_name %}; marks the end of the section. #}
+</head>
+<body>
+  <header>
+    <h1>Welcome to My Site</h1> <!-- Static header for all pages -->
+    <hr>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %} <!-- Content block to be filled by child templates -->
+  </main>
+
+  <footer>
+    <hr>
+    <p>&copy; 2025</p> <!-- Static footer -->
+  </footer>
+</body>
+</html>

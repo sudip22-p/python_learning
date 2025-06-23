@@ -1,0 +1,9 @@
+<!-- index.html -->
+{% extends "base.html" %} <!-- Inherit from base.html -->
+
+{% block title %}Home{% endblock %} <!-- Override title block -->
+
+{% block content %} <!-- Override content block -->
+  <h2>Hello, {{ user }}!</h2> <!-- Dynamic username -->
+  <p>This is the homepage.</p>
+{% endblock %}
