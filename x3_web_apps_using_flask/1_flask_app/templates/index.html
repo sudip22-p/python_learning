@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rental Property Listing</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Property Listings</h1>
+
+    <!-- Property Card Example -->
+    <div class="property-card">
+      <div class="property-image" style="background-image: url('{{ url_for('static', filename='images/apartment.jpg') }}');"></div>
+      <div class="details">
+        <h3>2BHK Apartment in Pokhara</h3>
+        <p>Rent: NPR 25,000/month</p>
+        <p>Furnished | Srijana Chowk | Pet Friendly</p>
+      </div>
+      <div class="actions">
+        <button onclick="editListing()">Edit</button>
+        <button class="delete" onclick="deleteListing()">Delete</button>
+      </div>
+    </div>
+
+    <!-- Add Property Form -->
+    <div class="form-section">
+      <h2>Add New Listing</h2>
+      <form action="/submit" method="POST">
+        <label>Title:</label><br>
+        <input type="text" name="title" required><br><br>
+
+        <label>Rent (NPR):</label><br>
+        <input type="number" name="rent" required><br><br>
+
+        <label>Location:</label><br>
+        <input type="text" name="location" required><br><br>
+
+        <label>Furnished:</label><br>
+        <select name="furnished">
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+        </select><br><br>
+
+        <button type="submit">Add Listing</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function editListing() {
+      if (confirm("Are you sure you want to make changes with this listing?")) {
+        alert("Can't do that at the moment.");
+      }
+    }
+
+    function deleteListing() {
+      if (confirm("Are you sure you want to delete this listing?")) {
+        alert("Can't do that at the moment.");
+      }
+    }
+  </script>
+</body>
+</html>
