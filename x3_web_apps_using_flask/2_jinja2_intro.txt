@@ -1,0 +1,87 @@
+Jinja2 Templating Engine - Basic Intro & Details
+
+----------------------------------------
+What is Jinja2?
+----------------------------------------
+- Jinja2 is a powerful templating engine for Python, used by Flask.
+- It allows you to create dynamic HTML by mixing HTML with Python-like syntax.
+- It helps separate HTML structure from Python code for cleaner projects.
+
+----------------------------------------
+Basic Syntax
+----------------------------------------
+1. Variables:
+   {{ variable_name }}
+   - Used to insert Python variables into HTML.
+
+2. Expressions and Logic:
+   {% if condition %}
+       HTML or other templates
+   {% elif other_condition %}
+       ...
+   {% else %}
+       ...
+   {% endif %}
+
+3. Loops:
+   {% for item in list %}
+       {{ item }}
+   {% endfor %}
+
+4. Comments:
+   {# This is a comment and won’t appear in rendered HTML #}
+
+----------------------------------------
+Common Features
+----------------------------------------
+- Template Inheritance:
+  Use {% extends "base.html" %} to inherit a base layout.
+  Define blocks with {% block content %} ... {% endblock %} for content replacement.
+
+- Filters:
+  Modify variables on the fly, e.g. {{ name|lower }}, {{ price|round(2) }}
+
+- Macros:
+  Like functions in templates to reuse code snippets.
+
+----------------------------------------
+Example
+----------------------------------------
+File: templates/index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ title }}</title>
+</head>
+<body>
+  <h1>Welcome, {{ user }}!</h1>
+
+  {% if items %}
+  <ul>
+    {% for item in items %}
+    <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No items found.</p>
+  {% endif %}
+</body>
+</html>
+
+----------------------------------------
+Flask Example (app.py)
+----------------------------------------
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return render_template("index.html",
+                           title="My Page",
+                           user="Sud",
+                           items=["apple", "banana", "cherry"])
+
+if __name__ == "__main__":
+    app.run(debug=True)
