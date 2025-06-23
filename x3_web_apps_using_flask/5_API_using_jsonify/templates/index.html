@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Property Listings API</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <h1>Add New Property</h1>
+  <form id="property-form">
+    <input type="text" id="title" placeholder="Title" required />
+    <input type="text" id="location" placeholder="Location" required />
+    <input type="number" id="rent" placeholder="Rent" required />
+    <button type="submit">Add Property</button>
+  </form>
+  <h1>Property Listings Available</h1>
+
+  <ul id="property-list"></ul>
+  <script>
+    async function fetchProperties() {
+      const res = await fetch('/api/properties');
+      const data = await res.json();
+
+      const list = document.getElementById('property-list');
+      list.innerHTML = '';
+
+      data.forEach(prop => {
+        const li = document.createElement('li');
+        li.textContent = `${prop.title} - ${prop.location} - NPR ${prop.rent}`;
+        list.appendChild(li);
+      });
+    }
+
+    document.getElementById('property-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById('title').value;
+      const location = document.getElementById('location').value;
+      const rent = +document.getElementById('rent').value;
+
+      const newProperty = { title, location, rent };
+
+      const res = await fetch('/api/properties', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newProperty)
+      });
+
+      if (res.ok) {
+        document.getElementById('property-form').reset();
+        fetchProperties();
+      } else {
+        alert('Failed to add property');
+      }
+    });
+
+    // Initial load
+    fetchProperties();
+  </script>
+</body>
+</html>
