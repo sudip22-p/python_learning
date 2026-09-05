@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+firebase-service-account.json
+processed_notice_ids.txt
+notification_data.txt
+.pytest_cache/
