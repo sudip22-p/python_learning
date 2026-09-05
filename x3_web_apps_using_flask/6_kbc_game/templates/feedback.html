@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ne">
+
+<head>
+    <meta charset="UTF-8">
+    <title>KBC - Feedback</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="main-flex">
+        <div class="left-side">
+            <div class="kbc-header">
+                <img src="/static/logo.png" alt="KBC Logo" class="kbc-logo" onerror="this.style.display='none'">
+                <div class="kbc-title">Ko Bancha Crorepati</div>
+                <div class="kbc-subtitle">Feedback</div>
+            </div>
+            <div class="container">
+                <div class="question-wrapper">
+                    <div class="question-nepali">{{ question.question_np }}</div>
+                    <div class="question-english">{{ question.question_en }}</div>
+                </div>
+                <form class="options-grid" style="pointer-events: none;">
+                    {% set labels = ['A', 'B', 'C', 'D'] %}
+                    {% for option in options %}
+                    {% set is_selected = option.en == selected %}
+                    <button type="button"
+                        class="option-btn 
+                        {% if is_selected and was_correct %}option-correct{% elif is_selected and not was_correct %}option-wrong{% endif %}"
+                        disabled>
+                        <span class="option-label">{{ labels[loop.index0] }}.&nbsp;</span>
+                        <div class="option-text">
+                            <span class="option-nepali">{{ option.np }}</span><br>
+                            <span class="option-english">{{ option.en }}</span>
+                        </div>
+                    </button>
+                    {% endfor %}
+                </form>
+                {% if not was_correct %}
+                <div class="correct-answer-reveal animated-reveal">
+                    <span>The correct answer was:</span><br>
+                    <span class="option-nepali">{{ question.options | selectattr('en', 'equalto', question.answer_en) |
+                        map(attribute='np') | list | first }}</span>
+                    <span class="option-english">({{ question.answer_en }})</span>
+                </div>
+                <script>
+                    setTimeout(function () {
+                        var form = document.querySelector('.feedback-actions form');
+                        var hiddenInput = document.createElement('input');
+                        hiddenInput.type = 'hidden';
+                        hiddenInput.name = 'next_question';
+                        hiddenInput.value = '1';
+                        form.appendChild(hiddenInput);
+                        form.submit();
+                    }, 3500);
+                </script>
+                {% endif %}
+                <div class="feedback-actions">
+                    <form method="POST">
+                        {% if was_correct %}
+                        <button type="submit" name="take_money" class="take-money-btn">Take {{ prizes[current_index] }}
+                            and End</button>
+                        <button type="submit" name="next_question" class="next-qn-btn">Go to Next Question</button>
+                        {% else %}
+                        <button type="submit" class="next-qn-btn">Continue</button>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="ladder">
+            <h3>Prize Ladder</h3>
+            <ul>
+                {% for prize in prizes|reverse %}
+                {% set idx = prizes|length - loop.index %}
+                <li class="ladder-item {% if idx == current_index %}current-prize{% endif %}">
+                    <span class="ladder-level">Q{{ idx+1 }}</span>
+                    <span class="ladder-prize">{{ prize }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

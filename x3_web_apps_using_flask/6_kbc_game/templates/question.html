@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ne">
+
+<head>
+    <meta charset="UTF-8">
+    <title>KBC - प्रश्न</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="main-flex">
+        <div class="left-side">
+            <div class="kbc-header">
+                <img src="/static/logo.png" alt="KBC Logo" class="kbc-logo" onerror="this.style.display='none'">
+                <div class="kbc-title">Ko Bancha Crorepati</div>
+                <div class="kbc-subtitle">के तपाई बन्न सक्नु हुन्छ त करोडपति ? </div>
+            </div>
+            <div class="container">
+                <div class="question-wrapper">
+                    <div class="question-nepali">{{ question.question_np }}</div>
+                    <div class="question-english">{{ question.question_en }}</div>
+                </div>
+
+                <form id="optionsForm" action="/answer" method="POST" class="options-grid">
+                    {% set labels = ['A', 'B', 'C', 'D'] %}
+                    {% for option in options %}
+                    <button type="button" class="option-btn" data-value="{{ option.en }}" onclick="selectOption(this)">
+                        <span class="option-label">{{ labels[loop.index0] }}.&nbsp;</span>
+                        <div class="option-text">
+                            <span class="option-nepali">{{ option.np }}</span><br>
+                            <span class="option-english">{{ option.en }}</span>
+                        </div>
+                    </button>
+                    {% endfor %}
+                    <input type="hidden" name="selected" id="selectedOptionInput">
+                </form>
+                <div style="text-align:center; margin-top:16px;">
+                    <div id="actionButtons" style="display:none;">
+                        <button id="lockBtn" class="lock-btn" onclick="lockOption()">Lock this option</button>
+                        <form method="POST" action="/walkaway" style="display:inline;">
+                            <button type="submit" class="take-money-btn" style="margin-left: 12px;">Walk Away</button>
+                        </form>
+                    </div>
+                </div>
+
+                <hr>
+                <div class="lifelines">
+                    {% if lifelines.fifty_fifty %}
+                    <a href="/lifeline/fifty_fifty">🌓 50-50</a>
+                    {% endif %}
+                    {% if lifelines.audience %}
+                    <a href="/lifeline/audience">📊 Audience Poll</a>
+                    {% endif %}
+                    {% if lifelines.friend %}
+                    <a href="/lifeline/friend">📞 Call a Friend</a>
+                    {% endif %}
+                </div>
+
+                {% if show_audience_poll and audience_poll_data %}
+                <div class="poll">
+                    <p><strong>Audience Poll:</strong></p>
+                    <div class="audience-bar-graph">
+                        {% for opt, percent in audience_poll_data %}
+                        <div class="audience-bar-row">
+                            <span class="audience-bar-label">{{ opt.np }} ({{ opt.en }})</span>
+                            <div class="audience-bar-bg">
+                                <div class="audience-bar" style="width: {{ percent }}%;"></div>
+                            </div>
+                            <span class="audience-bar-percent">{{ percent }}%</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                {% if used_lifeline == "friend" %}
+                <div class="call-friend">
+                    <p>📞 <strong>{{ question.call_friend.np }}</strong><br>
+                        💬 {{ question.call_friend.en }}</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="ladder">
+            <h3>Prize Ladder</h3>
+            <ul>
+                {% for prize in prizes|reverse %}
+                {% set idx = prizes|length - loop.index %}
+                <li class="ladder-item {% if idx == current_index %}current-prize prize-glow{% endif %}">
+                    <span class="ladder-level">Q{{ idx+1 }}</span>
+                    <span class="ladder-prize">{{ prize }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <script>
+        // Reset state on each page load
+        let selectedBtn = null;
+        let locked = false;
+        // Deselect all option buttons
+        document.addEventListener('DOMContentLoaded', function () {
+            locked = false;
+            selectedBtn = null;
+            let btns = document.querySelectorAll('.option-btn');
+            btns.forEach(btn => btn.classList.remove('option-selected'));
+            document.getElementById('lockBtn').disabled = false;
+        });
+        function selectOption(btn) {
+            if (locked) return;
+            if (selectedBtn) selectedBtn.classList.remove('option-selected');
+            btn.classList.add('option-selected');
+            selectedBtn = btn;
+            document.getElementById('selectedOptionInput').value = btn.getAttribute('data-value');
+            document.getElementById('actionButtons').style.display = 'block';
+        }
+        function lockOption() {
+            if (locked) return;
+            if (document.getElementById('selectedOptionInput').value) {
+                locked = true;
+                // Disable all option buttons and lock button
+                let btns = document.querySelectorAll('.option-btn');
+                btns.forEach(btn => btn.disabled = true);
+                document.getElementById('lockBtn').disabled = true;
+                document.getElementById('optionsForm').submit();
+            }
+        }
+    </script>
+</body>
+
+</html>
